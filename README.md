@@ -6,7 +6,7 @@ such as Histogram Equalization (HE), Contrast Limited Adaptive Histogram Equaliz
 We want to see the differences in perceptual quality and inference/computation
 speed between traditional approaches and deep learning models.
 
-For the current task at hand I have chosen HE, CLAHE as traditional techniques and FUnIE-GAN as the deep learning model through which we will enhance the images. I have chosen 10 images from the UIEB dataset which are portraying different types of possible underwater images to test out the metrics mentioned above.
+For the current task at hand I have chosen HE, CLAHE as traditional techniques and FUnIE-GAN as the deep learning model running on T4 GPU through which we will enhance the images. I have chosen 10 images from the UIEB dataset which are portraying different types of possible underwater images to test out the metrics mentioned above.
 
 Let's look at some results about differences in perceptual quality first,
 
@@ -21,6 +21,19 @@ This image clearly demonstrates one of the most common drawback of HE. Which is 
 ![Comparison image 3](outputs/102_img__comparison.png)
 
 This image on the otherhand clearly showcases how balanced contrast can significantly improve the perceptual ability to see details and tell depth apart in the CLAHE image. HE suffers from global brightness increase resulting in over bright regions which loses details similar to the previous image but on the opposite end of the spectrum where instead of making regions darker it makes regions much lighter than required which results in lack of depth recognition as well. This image also showcases the artifact hallucination issue FUnIE-GAN has where at the top right we can see a patch of random colors introduced into the image.
+
+For the rest of the images as well CLAHE consistenly gave out images with proper balanced contrast and improved perceptual ability to differentiate details and depth. Whereas HE due to not having spatial awareness failed to preserve the color in many cases as well as losing details by overly amplifying noise. FUnIE-GAN despite being a model trained specificially on underwater images performed worse and nondeterministically likely due to factors such as 256x256 size limit and hallucinations causing low contrast, blurriness, artifact generation.
+
+As for Inference/Computation Speed the following table shows the average time required to generate the enhanced image,
+
+| Method    | Average Inference Time | Max Time  | Min Time |
+|-----------|------------------------|-----------|----------|
+| HE        |    2.27 ms             |  6.9 ms   |  0.8 ms  |
+| CLAHE     |    9.61 ms             |  27.8 ms  |  2.8 ms  |
+| FUnIE-GAN |    110.95 ms           |  977.6 ms |  11.6 ms |
+
+HE is the fastest by far due to simple operation. CLAHE is slightly slower due to processing tiles first. FUnIE-GAN is significantly slower than both due to using GPU operation the max of 977.6 ms is likely due to GPU warmup but it's minimum time is also the greatest. It is worth noting here that despite running FUnIE-GAN on a T4 GPU it was about 11.5x slower than CLAHE on average.
+
 
 
 

@@ -1,3 +1,5 @@
+# Underwater Image Enhancement: Traditional vs Deep Learning
+
 Underwater visual information play a crucial role in perceiving and gathering data about the environment. It is easy for underwater vehicles to obtain images but due to various complexities of the aquatic terrains along with light absorption behavior and scattering in water the original images turn out to be degraded in quality consequently making them unfit for analysis and interpretation by the human eye and computers.
 
 For this reason various image processing algorithms are used in conjunction with one another or in a standalone way to enhance the quality of the raw image captured in an efficient manner. The problems of color bias, low contrast, fuzziness are effectively mitigated by using various traditional techniques and more recently deep learning based image enhancement strategies. The methods based on deep learning can be divided into those based on convolution neural networks (CNN) and those based on generative adversarial networks (GAN). On the other hand traditional image processing algorithms used for underwater image enhancements
@@ -34,6 +36,10 @@ As for Inference/Computation Speed the following table shows the average time re
 
 HE is the fastest by far due to simple operation. CLAHE is slightly slower due to processing tiles first. FUnIE-GAN is significantly slower than both due to using GPU operation the max of 977.6 ms is likely due to GPU warmup but it's minimum time is also the greatest. It is worth noting here that despite running FUnIE-GAN on a T4 GPU it was about 11.5x slower than CLAHE on average.
 
+# Conclusion
+
+Traditional preprocessing techniques based on the results of this test seem to be favorable for underwater images. CLAHE has performed better in terms of inference speed and perceptual quality. It should be kept in mind that multiple preprocessing techniques could be used together to enhance the image quality even more such as along with improving contrast also adding White Balance to restore natural colors.
+As well as the fact that DL techniques can be made better with a more sophisticated preprocessing pipeline to fully accommodate the model entirely. In general DL models have an extra overhead of requiring extra compute along with non-deterministic behavior depending on training data and other parameters while traditional methods do not depend on training data and are deterministic algorithms.
 
 
 

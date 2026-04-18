@@ -4,23 +4,28 @@ Underwater visual information play a crucial role in perceiving and gathering da
 
 For this reason various image processing algorithms are used in conjunction with one another or in a standalone way to enhance the quality of the raw image captured in an efficient manner. The problems of color bias, low contrast, fuzziness are effectively mitigated by using various traditional techniques and more recently deep learning based image enhancement strategies. The methods based on deep learning can be divided into those based on convolution neural networks (CNN) and those based on generative adversarial networks (GAN) such as FUnIE-GAN, Water-Net, UWCNN. On the other hand traditional image processing algorithms used for underwater image enhancements such as Histogram Equalization (HE), Contrast Limited Adaptive Histogram Equalization (CLAHE), White Balance (Gray World Assumption) etc.
 
-<u>**General Consensus**</u>
+### General Consensus
 
 **Traditional Methods:**
-    Pros:
-        - Lightweight and Fast
-        - Deterministic
-    Cons: 
-        - Not adaptable, limited by initial rules
-        - No real understanding of the image
+
+Pros: 
+- Lightweight and Fast
+- Deterministic
+  
+Cons:
+- Not adaptable, limited by initial rules
+- No real understanding of the image
+
 
 **Deep learning based methods:**
-    Pros:
-        - Learns directly from data
-        - Can handle complex degradation
-    Cons: 
-        - Higher compute overhead than traditional
-        - Non-deterministic performance. Relies on domain match and can hallucinate
+
+Pros:
+- Learns directly from data
+- Can handle complex degradation
+  
+Cons: 
+- Higher compute overhead than traditional
+- Non-deterministic performance. Relies on domain match and can hallucinate
 
 We want to see the differences in perceptual quality and inference/computation
 speed between traditional approaches and deep learning models.

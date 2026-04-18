@@ -2,13 +2,36 @@
 
 Underwater visual information play a crucial role in perceiving and gathering data about the environment. It is easy for underwater vehicles to obtain images but due to various complexities of the aquatic terrains along with light absorption behavior and scattering in water the original images turn out to be degraded in quality consequently making them unfit for analysis and interpretation by the human eye and computers.
 
-For this reason various image processing algorithms are used in conjunction with one another or in a standalone way to enhance the quality of the raw image captured in an efficient manner. The problems of color bias, low contrast, fuzziness are effectively mitigated by using various traditional techniques and more recently deep learning based image enhancement strategies. The methods based on deep learning can be divided into those based on convolution neural networks (CNN) and those based on generative adversarial networks (GAN). On the other hand traditional image processing algorithms used for underwater image enhancements
-such as Histogram Equalization (HE), Contrast Limited Adaptive Histogram Equalization (CLAHE), White Balance (Gray World Assumption) etc.
+For this reason various image processing algorithms are used in conjunction with one another or in a standalone way to enhance the quality of the raw image captured in an efficient manner. The problems of color bias, low contrast, fuzziness are effectively mitigated by using various traditional techniques and more recently deep learning based image enhancement strategies. The methods based on deep learning can be divided into those based on convolution neural networks (CNN) and those based on generative adversarial networks (GAN) such as FUnIE-GAN, Water-Net, UWCNN. On the other hand traditional image processing algorithms used for underwater image enhancements such as Histogram Equalization (HE), Contrast Limited Adaptive Histogram Equalization (CLAHE), White Balance (Gray World Assumption) etc.
+
+<u>**General Consensus**</u>
+
+**Traditional Methods:**
+    Pros:
+        - Lightweight and Fast
+        - Deterministic
+    Cons: 
+        - Not adaptable, limited by initial rules
+        - No real understanding of the image
+
+**Deep learning based methods:**
+    Pros:
+        - Learns directly from data
+        - Can handle complex degradation
+    Cons: 
+        - Higher compute overhead than traditional
+        - Non-deterministic performance. Relies on domain match and can hallucinate
 
 We want to see the differences in perceptual quality and inference/computation
 speed between traditional approaches and deep learning models.
 
-For the current task at hand I have chosen HE, CLAHE as traditional techniques and FUnIE-GAN as the deep learning model running on T4 GPU through which we will enhance the images. I have chosen 10 images from the UIEB dataset which are portraying different types of possible underwater images to test out the metrics mentioned above.
+For the current task at hand I have chosen HE, CLAHE as traditional techniques. Several deep learning models exist for underwater enhancement but I have chosen FUnIE-GAN running on T4 GPU as its specifically trained for AUV based technology due to being lightweight through which we will enhance the images. I have chosen 10 images from the UIEB dataset which are portraying different types of possible underwater images to test out the metrics mentioned above.
+
+**Histogram Equalization (HE):** globally redistributes pixel intensities across the full range.
+
+**Contrast Limited Adaptive Histogram Equalization (CLAHE):** a smarter way to do HE where the image is divided into tiles resulting in a more localized contrast enhancement.
+
+**FUnIE-GAN:** a GAN based deep learning model trained specifically on underwater images to restore color balance and reduce haze. Designed to be lightweight enough for real time use on AUV embedded hardware.
 
 Let's look at some results about differences in perceptual quality first,
 
@@ -38,9 +61,10 @@ HE is the fastest by far due to simple operation. CLAHE is slightly slower due t
 
 # Conclusion
 
-Traditional preprocessing techniques based on the results of this test seem to be favorable for underwater images. CLAHE has performed better in terms of inference speed and perceptual quality. It should be kept in mind that multiple preprocessing techniques could be used together to enhance the image quality even more such as along with improving contrast also adding White Balance to restore natural colors.
-As well as the fact that DL techniques can be made better with a more sophisticated preprocessing pipeline to fully accommodate the model entirely. In general DL models have an extra overhead of requiring extra compute along with non-deterministic behavior depending on training data and other parameters while traditional methods do not depend on training data and are deterministic algorithms.
+Traditional preprocessing techniques based on the results of this test seem to be favorable for underwater images. CLAHE has performed better in terms of inference speed and perceptual quality. Along with keeping messy real world images and data in mind especially for things like AUVs traditional methods seem more reliable than deep learning models.
 
+It should be kept in mind that multiple preprocessing techniques could be used together to enhance the image quality even more such as along with improving contrast with CLAHE also adding White Balance to restore natural colors.
+As well as the fact that DL techniques can be made better with a more sophisticated preprocessing pipeline to fully accommodate the model entirely. In general DL models have an extra overhead of requiring extra compute along with non-deterministic behavior depending on training data and other parameters while traditional methods do not depend on training data and are deterministic algorithms.
 
 
 

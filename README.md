@@ -1,0 +1,27 @@
+Underwater visual information play a crucial role in perceiving and gathering data about the environment. It is easy for underwater vehicles to obtain images but due to various complexities of the aquatic terrains along with light absorption behavior and scattering in water the original images turn out to be degraded in quality consequently making them unfit for analysis and interpretation by the human eye and computers.
+
+For this reason various image processing algorithms are used in conjunction with one another or in a standalone way to enhance the quality of the raw image captured in an efficient manner. The problems of color bias, low contrast, fuzziness are effectively mitigated by using various traditional techniques and more recently deep learning based image enhancement strategies. The methods based on deep learning can be divided into those based on convolution neural networks (CNN) and those based on generative adversarial networks (GAN). On the other hand traditional image processing algorithms used for underwater image enhancements
+such as Histogram Equalization (HE), Contrast Limited Adaptive Histogram Equalization (CLAHE), White Balance (Gray World Assumption) etc.
+
+We want to see the differences in perceptual quality and inference/computation
+speed between traditional approaches and deep learning models.
+
+For the current task at hand I have chosen HE, CLAHE as traditional techniques and FUnIE-GAN as the deep learning model through which we will enhance the images. I have chosen 10 images from the UIEB dataset which are portraying different types of possible underwater images to test out the metrics mentioned above.
+
+Let's look at some results about differences in perceptual quality first,
+
+![Comparison image 1](outputs/101_img__comparison.png)
+
+This original image suffers from green color cast and haze. From the image perceptually it is clear that CLAHE has the best quality out of all of them. It clears out a lot of fuzziness from the image and perfectly balances the contrast. On the other hand HE suffers from loss of detail in some regions notably the darker regions where the image loses a lot of edges and crispness along with notable color distortion. FUnIE-GAN overcorrected the greenish cast to make it yellowish which is signficant color distortion. Along with that FUnIE-GAN due to being restricted to only use images of size 256x256 loses a lot of fine details due to pixel distortion.
+
+![Comparison image 2](outputs/11374_comparison.png)
+
+This image clearly demonstrates one of the most common drawback of HE. Which is aggressively redistributing the historgram globally resulting in this pixelated image. Some regions are very dark which loses much more detail than acceptable. CLAHE although much better than the HE image it still has slight pixelations at some regions but the overall balanced contrast improves the ability to see fine grained details significantly. FUnIE-GAN on the other hand introduces various RGB artifacts in the entire image trying to restore the color balance.
+
+![Comparison image 3](outputs/102_img__comparison.png)
+
+This image on the otherhand clearly showcases how balanced contrast can significantly improve the perceptual ability to see details and tell depth apart in the CLAHE image. HE suffers from global brightness increase resulting in over bright regions which loses details similar to the previous image but on the opposite end of the spectrum where instead of making regions darker it makes regions much lighter than required which results in lack of depth recognition as well. This image also showcases the artifact hallucination issue FUnIE-GAN has where at the top right we can see a patch of random colors introduced into the image.
+
+
+
+
